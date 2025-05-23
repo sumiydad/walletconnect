@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>WalletConnect QR</title>
+  <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+</head>
+<body>
+  <h1>Scan this QR Code with Trust Wallet</h1>
+  <img id="qrcode" alt="WalletConnect QR Code" />
+
+  <script>
+    const qr = document.getElementById('qrcode');
+
+    fetch('http://localhost:3000/walletconnect-uri')
+      .then(res => res.json())
+      .then(data => {
+        const uri = data.uri;
+        QRCode.toDataURL(uri, (err, url) => {
+          if (!err) {
+            qr.src = url;
+          } else {
+            console.error(err);
+          }
+        });
+      })
+      .catch(err => {
+        console.error('Error fetching WalletConnect URI:', err);
+      });
+  </script>
+</body>
+</html>
