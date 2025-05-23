@@ -1,1 +1,3 @@
-/opt/render/project/src/
+"scripts": {
+  "start": "node server.js"
+}
